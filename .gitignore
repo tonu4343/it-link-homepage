@@ -1,0 +1,21 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs and dependencies
+*.log
+node_modules/
+
+# Environment / secrets
+.env
+.env.*
+
+# Deployment tool folders
+.vercel/
