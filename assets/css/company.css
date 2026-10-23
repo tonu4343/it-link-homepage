@@ -1,0 +1,763 @@
+/* =========================================================
+   IT-Link — Company page (会社情報)
+   Builds on style.css (tokens, header, contact, footer).
+   ========================================================= */
+
+.cp-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* section labels with a leading rule (matches Company / CSR) */
+.cp-hero .section-label,
+.cp-section .section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cp-hero .section-label::before,
+.cp-section .section-label::before {
+  content: "";
+  width: 32px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--blue-bright);
+}
+
+/* =========================================================
+   HERO — full-width facility photo, navy overlay on the left
+   ========================================================= */
+
+.cp-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 480px;
+  padding: 56px 0 96px;
+  background-color: #062a55;
+  background-image:
+    linear-gradient(90deg, rgba(4, 26, 58, 0.94) 0%, rgba(4, 26, 58, 0.82) 30%, rgba(6, 42, 85, 0.35) 55%, rgba(6, 42, 85, 0) 75%),
+    url("../images/company-hero-facility.png.png");
+  background-size: cover, cover;
+  background-position: center, 60% center;
+  background-repeat: no-repeat;
+  color: var(--white);
+}
+
+/* subtle diagonal blue bands */
+.cp-hero::before,
+.cp-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -30%;
+  height: 160%;
+  transform: skewX(-24deg);
+  pointer-events: none;
+}
+
+.cp-hero::before {
+  left: 32%;
+  width: 14%;
+  background: linear-gradient(180deg, rgba(64, 160, 255, 0.16), rgba(64, 160, 255, 0));
+}
+
+.cp-hero::after {
+  left: 44%;
+  width: 3%;
+  border-left: 1px solid rgba(140, 200, 255, 0.28);
+  background: rgba(64, 160, 255, 0.06);
+}
+
+.cp-hero-inner {
+  width: 100%;
+}
+
+.cp-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+  color: #a9c4de;
+  font-size: 12px;
+}
+
+.cp-breadcrumb li + li::before {
+  content: "/";
+  margin-right: 8px;
+  color: #6f93b8;
+}
+
+.cp-breadcrumb a {
+  color: #dcebf8;
+}
+
+.cp-breadcrumb a:hover {
+  color: var(--white);
+  text-decoration: underline;
+}
+
+.cp-hero .section-label {
+  color: #8fd0ff;
+}
+
+.cp-hero .section-label::before {
+  background: #8fd0ff;
+}
+
+.cp-hero-title {
+  margin: 0 0 18px;
+  color: var(--white);
+  font-size: 52px;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 18px rgba(0, 16, 40, 0.35);
+}
+
+.cp-hero-lead {
+  max-width: 520px;
+  margin: 0;
+  color: #dcebf8;
+  font-size: 16px;
+  line-height: 2;
+}
+
+/* Japanese text: break at <br>/<wbr>/spaces only, never mid-word */
+.cp-hero-lead,
+.cp-info-list li,
+.cp-cert-sub,
+.cp-cert-title {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* section navigation cards, overlapping the hero bottom */
+.cp-subnav {
+  position: relative;
+  z-index: 2;
+  margin-top: -52px;
+}
+
+.cp-subnav-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* icon | labels | arrow */
+.cp-subnav-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  min-height: 92px;
+  padding: 18px 16px;
+  border: 1px solid #d6e8f7;
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: 0 12px 30px rgba(18, 82, 140, 0.1);
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.cp-subnav-icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eef6fd;
+  color: var(--blue);
+  transition: background 0.25s, color 0.25s;
+}
+
+.cp-subnav-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.cp-subnav-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.cp-subnav-en {
+  color: var(--blue);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.cp-subnav-ja {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.45;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.cp-subnav-arrow {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e8f4ff;
+  color: var(--blue);
+  font-size: 15px;
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+
+.cp-subnav-card:hover,
+.cp-subnav-card:focus-visible {
+  border-color: #5aaef0;
+  box-shadow: 0 18px 38px rgba(0, 105, 197, 0.16);
+  transform: translateY(-3px);
+}
+
+.cp-subnav-card:hover .cp-subnav-arrow,
+.cp-subnav-card:focus-visible .cp-subnav-arrow {
+  background: var(--blue);
+  color: var(--white);
+  transform: translateX(3px);
+}
+
+/* narrower desktops: 2x2 so labels stay on one line */
+@media (max-width: 1100px) {
+  .cp-subnav-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* current page */
+.cp-subnav-card.is-active {
+  border-color: var(--blue);
+  background: #eef7ff;
+  box-shadow: 0 12px 30px rgba(8, 124, 229, 0.16), inset 0 -3px 0 var(--blue);
+}
+
+.cp-subnav-card.is-active .cp-subnav-ja {
+  color: var(--blue);
+}
+
+.cp-subnav-card.is-active .cp-subnav-icon {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.cp-subnav-card.is-active .cp-subnav-arrow {
+  background: var(--white);
+}
+
+/* first content section clears the overlapping cards */
+.cp-subnav + .cp-section {
+  padding-top: 64px;
+}
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.cp-section {
+  padding: 80px 0;
+  background: var(--white);
+}
+
+.cp-section--tint {
+  background: linear-gradient(180deg, #f6fbff 0%, #edf6fd 100%);
+}
+
+.cp-section .section-title {
+  margin-bottom: 32px;
+}
+
+/* ---------- 会社概要 table ---------- */
+
+.cp-table-card {
+  overflow: hidden;
+  border: 1px solid #dbe8f3;
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 10px 30px rgba(18, 82, 140, 0.07);
+}
+
+.cp-profile {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cp-profile th,
+.cp-profile td {
+  padding: 22px 32px;
+  border-bottom: 1px solid #e6eef6;
+  color: var(--ink);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.9;
+}
+
+.cp-profile tr:last-child th,
+.cp-profile tr:last-child td {
+  border-bottom: 0;
+}
+
+.cp-profile th {
+  width: 220px;
+  border-right: 1px solid #e6eef6;
+  background: #f3f8fd;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.cp-profile td {
+  font-size: 15px;
+}
+
+.cp-profile a {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.cp-profile a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- 認証・許可 cards ---------- */
+
+.cp-cert-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.cp-cert {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 28px 26px;
+  border: 1px solid #dbe8f3;
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 10px 30px rgba(18, 82, 140, 0.06);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.cp-cert:hover {
+  border-color: #9fcdf4;
+  box-shadow: 0 16px 34px rgba(0, 105, 197, 0.1);
+}
+
+.cp-cert--wide {
+  grid-column: span 2;
+}
+
+.cp-cert-tag {
+  align-self: flex-start;
+  margin: 0 0 14px;
+  padding: 3px 12px;
+  border-radius: 50px;
+  background: #e8f4ff;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.cp-cert-tag--permit {
+  background: #eaf0f6;
+  color: #34506b;
+}
+
+.cp-cert-title {
+  margin: 0 0 16px;
+  color: var(--ink);
+  font-size: 21px;
+  line-height: 1.5;
+}
+
+.cp-cert-sub {
+  display: block;
+  margin-bottom: 2px;
+  color: #5d7083;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cp-cert-list {
+  margin: 0;
+}
+
+.cp-cert-list > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+  padding: 10px 0;
+  border-top: 1px solid #edf2f8;
+}
+
+.cp-cert-list dt {
+  min-width: 72px;
+  color: #5d7083;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cp-cert-list dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cp-cert-list--grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 32px;
+}
+
+.cp-cert-note {
+  margin: 10px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid #edf2f8;
+  color: #4f6478;
+  font-size: 14px;
+}
+
+/* ---------- 主要取引銀行・加盟団体 ---------- */
+
+.cp-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.cp-info-card {
+  padding: 30px 32px;
+  border: 1px solid #dbe8f3;
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 10px 30px rgba(18, 82, 140, 0.06);
+}
+
+.cp-info-title {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: 19px;
+}
+
+.cp-info-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cp-info-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid #edf2f8;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.cp-info-list li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue-bright);
+  box-shadow: 0 0 0 3px #dff0ff;
+}
+
+/* ---------- 代表挨拶 link card ---------- */
+
+.cp-message-section {
+  padding: 56px 0;
+}
+
+.cp-message-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px 40px;
+  border: 1px solid #dbe8f3;
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 10px 30px rgba(18, 82, 140, 0.07);
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.cp-message-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.cp-message-text .section-label {
+  margin-bottom: 6px;
+}
+
+.cp-message-title {
+  color: var(--ink);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.cp-message-note {
+  margin-top: 4px;
+  color: #5d7083;
+  font-size: 13px;
+}
+
+.cp-message-button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 26px;
+  border-radius: 50px;
+  background: var(--blue);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cp-message-card:hover,
+.cp-message-card:focus-visible {
+  border-color: #5aaef0;
+  box-shadow: 0 18px 38px rgba(0, 105, 197, 0.14);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .cp-hero {
+    min-height: 440px;
+    background-position: center, 65% center;
+  }
+
+  .cp-hero-title {
+    font-size: 44px;
+  }
+
+  .cp-subnav-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cp-cert-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cp-profile th {
+    width: 170px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* stacked: darker overlay from the top so text stays readable */
+  .cp-hero {
+    align-items: flex-start;
+    min-height: 420px;
+    padding: 32px 0 88px;
+    background-image:
+      linear-gradient(180deg, rgba(4, 26, 58, 0.92) 0%, rgba(4, 26, 58, 0.78) 45%, rgba(6, 42, 85, 0.25) 80%, rgba(6, 42, 85, 0.1) 100%),
+      url("../images/company-hero-facility.png.png");
+    background-position: center, 40% center;
+  }
+
+  .cp-hero::before {
+    left: 55%;
+    width: 30%;
+  }
+
+  .cp-hero::after {
+    display: none;
+  }
+
+  .cp-breadcrumb ol {
+    margin-bottom: 20px;
+  }
+
+  .cp-hero-title {
+    font-size: 36px;
+  }
+
+  .cp-hero-lead {
+    font-size: 15px;
+  }
+
+  .cp-subnav {
+    margin-top: -48px;
+  }
+
+  .cp-subnav-list {
+    gap: 12px;
+  }
+
+  .cp-subnav-card {
+    min-height: 84px;
+    padding: 16px 16px;
+  }
+
+  .cp-subnav-ja {
+    font-size: 14px;
+  }
+
+  .cp-subnav-arrow {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cp-subnav-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cp-section {
+    padding: 56px 0;
+  }
+
+  .cp-section .section-title {
+    margin-bottom: 24px;
+  }
+
+  /* profile table: label stacked above value */
+  .cp-profile,
+  .cp-profile tbody,
+  .cp-profile tr,
+  .cp-profile th,
+  .cp-profile td {
+    display: block;
+    width: auto;
+  }
+
+  .cp-profile tr {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e6eef6;
+  }
+
+  .cp-profile tr:last-child {
+    border-bottom: 0;
+  }
+
+  .cp-profile th,
+  .cp-profile td {
+    padding: 0;
+    border: 0;
+  }
+
+  .cp-profile th {
+    margin-bottom: 2px;
+    border-right: 0;
+    background: none;
+    color: var(--blue);
+    font-size: 12px;
+  }
+
+  .cp-cert-grid,
+  .cp-info-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .cp-cert--wide {
+    grid-column: auto;
+  }
+
+  .cp-cert {
+    padding: 24px 22px 22px;
+  }
+
+  .cp-cert-title {
+    font-size: 19px;
+  }
+
+  .cp-cert-list--grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cp-info-card {
+    padding: 24px 22px;
+  }
+
+  .cp-message-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 26px 22px;
+  }
+
+  .cp-message-button {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .cp-hero-title {
+    font-size: 32px;
+  }
+
+  .cp-hero {
+    min-height: 400px;
+  }
+
+  /* one card per row so long labels stay on one line */
+  .cp-subnav-list {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .cp-subnav-card {
+    min-height: 70px;
+  }
+
+  .cp-cert-sub {
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-subnav-card,
+  .cp-subnav-arrow,
+  .cp-subnav-icon,
+  .cp-cert,
+  .cp-message-card {
+    transition: none;
+  }
+
+  .cp-message-card:hover,
+  .cp-message-card:focus-visible,
+  .cp-subnav-card:hover,
+  .cp-subnav-card:focus-visible,
+  .cp-subnav-card:hover .cp-subnav-arrow,
+  .cp-subnav-card:focus-visible .cp-subnav-arrow {
+    transform: none;
+  }
+}
